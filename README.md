@@ -1,5 +1,28 @@
 # ControlLoRA: A Lightweight Neural Network To Control Stable Diffusion Spatial Information
 
+(added by Margarita):
+
+- to add COCO dataset, download COCO dataset  to folder data/COCO_train2017, then run examples/make_coco_preprocessed.py (I think it took 3hours, 6G cpu and 1 gpu)
+- Stable diffusion should be downloaded into pretrained/ folder in root
+- run 2 new tasks (training mode):
+
+(for hed on coco)
+```sh
+main.py --config configs/control_lora_coco_hed.yaml
+```
+
+(for scribble on coco)
+```sh
+main.py --config configs/control_lora_coco_scribble.yaml
+```
+
+or using slurm -- put launch command above to job.slurm script and launch:
+``
+sbatch job.slurm
+```
+With the configuration specified, training takes ~ 1h 30 min on A100 with 40 GB
+
+
 EN | [中文](./README_CN.md)
 
 By combining the ideas of [lllyasviel/ControlNet](https://github.com/lllyasviel/ControlNet) and [cloneofsimo/lora](https://github.com/cloneofsimo/lora), we can easily fine-tune stable diffusion to achieve the purpose of controlling its spatial information, with ControlLoRA, a simple and small (~7M parameters, ~25M storage space) network.

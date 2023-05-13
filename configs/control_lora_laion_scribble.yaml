@@ -31,10 +31,10 @@ model:
     concat_hidden: false
 
 dataset:
-  target: control_lora.datasets.CannyDataset
+  target: control_lora.datasets.ScribbleDataset
   params:
-    path: data/images_to_sample #data/laion-high-resolution-part
-    is_imagefolder: true #false
+    path: data/laion-high-resolution-part
+    is_imagefolder: false
     instance_text: null
     skip_guide: false
     resolution: 512
@@ -45,7 +45,7 @@ trainer:
   target: control_lora.commands.trainer.Trainer
   params:
     pretrained_model_name_or_path: pretrained # runwayml/stable-diffusion-v1-5
-    output_dir: ckpts/sd-v1-5-control-lora-canny-laion-fantasy
+    output_dir: ckpts/sd-v1-5-control-lora-scribble-laion-high-resolution-part
     train_batch_size: 1
     gradient_accumulation_steps: 1
     checkpointing_steps: 5000
@@ -56,9 +56,9 @@ trainer:
     lr_scheduler: constant
     lr_warmup_steps: 0
     max_train_steps: 30000
-    validation_prompt: fantasy character, colorful
+    validation_prompt: anime character
     validation_epochs: -1
     mixed_precision: 'fp16'
     enable_xformers_memory_efficient_attention: false
-    seed: 110
+    seed: 11
     num_sampling_images: 1000

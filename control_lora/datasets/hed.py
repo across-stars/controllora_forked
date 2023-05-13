@@ -11,6 +11,9 @@ from control_lora.datasets.base import BaseDataset
 from control_lora.datasets.annotator.util import resize_image, HWC3
 from control_lora.datasets.annotator.hed import HEDdetector
 
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 
 class HEDDataset(BaseDataset):
     def __init__(self, zfill=16, **kwargs):

@@ -8,7 +8,7 @@ model:
       - SimpleDownEncoderBlock2D
       - SimpleDownEncoderBlock2D
     down_block_out_channels: [32, 64, 128, 256]
-    layers_per_block: 1
+    layers_per_block: 2
     act_fn: silu
     norm_num_groups: 32
     post_down_block_types:
@@ -16,7 +16,7 @@ model:
       - SimpleDownEncoderBlock2D
       - SimpleDownEncoderBlock2D
       - SimpleDownEncoderBlock2D
-    post_layers_per_block: 1
+    post_layers_per_block: 2
     pre_control_types: 
       - SimpleDownEncoderBlock2D
       - SimpleDownEncoderBlock2D
@@ -48,7 +48,7 @@ dataset:
 trainer:
   target: control_lora.commands.trainer.Trainer
   params:
-    pretrained_model_name_or_path: runwayml/stable-diffusion-v1-5
+    pretrained_model_name_or_path: pretrained
     output_dir: ckpts/sd-v1-5-control-lora-encoder-only-mpii-depth
     train_batch_size: 1
     gradient_accumulation_steps: 1
@@ -56,13 +56,13 @@ trainer:
     sample_in_checkpointing: true
     resume_from_checkpoint: latest
     learning_rate: 0.00001
-    report_to: wandb
+    report_to: tensorboard
     lr_scheduler: constant
     lr_warmup_steps: 0
     max_train_steps: 100000
-    validation_prompt: portrait of a cute pink hair girl
+    validation_prompt: a fairy with wings flies
     validation_epochs: -1
     mixed_precision: 'fp16'
     enable_xformers_memory_efficient_attention: false
     seed: 42
-    num_sampling_images: 100
+    num_sampling_images: 10_000

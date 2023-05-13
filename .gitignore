@@ -6,3 +6,6 @@ samples/
 wandb/
 tmp/
 cache
+run_slurm/
+*.swp
+pretrained/
